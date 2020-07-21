@@ -37,6 +37,128 @@
           }
         }
       }
+    },
+    "usefulPipesTest": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/usefulPipesTest",
+      "sourceRoot": "projects/usefulPipesTest/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/usefulPipesTest",
+            "index": "projects/usefulPipesTest/src/index.html",
+            "main": "projects/usefulPipesTest/src/main.ts",
+            "polyfills": "projects/usefulPipesTest/src/polyfills.ts",
+            "tsConfig": "projects/usefulPipesTest/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/usefulPipesTest/src/favicon.ico",
+              "projects/usefulPipesTest/src/assets"
+            ],
+            "styles": [
+              "projects/usefulPipesTest/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/usefulPipesTest/src/environments/environment.ts",
+                  "with": "projects/usefulPipesTest/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "usefulPipesTest:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "usefulPipesTest:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "usefulPipesTest:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/usefulPipesTest/src/test.ts",
+            "polyfills": "projects/usefulPipesTest/src/polyfills.ts",
+            "tsConfig": "projects/usefulPipesTest/tsconfig.spec.json",
+            "karmaConfig": "projects/usefulPipesTest/karma.conf.js",
+            "assets": [
+              "projects/usefulPipesTest/src/favicon.ico",
+              "projects/usefulPipesTest/src/assets"
+            ],
+            "styles": [
+              "projects/usefulPipesTest/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/usefulPipesTest/tsconfig.app.json",
+              "projects/usefulPipesTest/tsconfig.spec.json",
+              "projects/usefulPipesTest/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/usefulPipesTest/e2e/protractor.conf.js",
+            "devServerTarget": "usefulPipesTest:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "usefulPipesTest:serve:production"
+            }
+          }
+        }
+      }
     }},
   "defaultProject": "usefulPipes"
 }
